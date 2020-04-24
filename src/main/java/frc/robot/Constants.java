@@ -16,4 +16,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static enum CanIds{
+        
+        intakeVictor(11);
+
+        public final int id;
+        CanIds(int id){this.id = id;}
+    }
+
 }
