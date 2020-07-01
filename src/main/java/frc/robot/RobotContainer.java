@@ -19,7 +19,7 @@ public class RobotContainer {
   private final IntakeSub intake = new IntakeSub(intakeVictor);
 
   // The commands that run on those subsystems are defined here
-  private final RunIntake runIntake = new RunIntake();
+  private final RunIntake runIntake = new RunIntake(intake, .5);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
