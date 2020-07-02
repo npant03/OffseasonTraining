@@ -10,12 +10,13 @@ import frc.robot.RobotContainer;
 
 public class Week4ButtonBindingTest {
 
-    PaddedXbox xbox = mock(PaddedXbox.class);
-    RobotContainer robotContainer = new RobotContainer(xbox);
+    SimMotorControllerFactory factory = new SimMotorControllerFactory(false);
+
+    RobotContainer robotContainer = new RobotContainer(factory);
 
     @Test
     public void runXbox(){
-        robotContainer.configureButtonBindings();
+        // robotContainer.configureButtonBindings();
         /**
          * once we fix padded xbox, in order to make a button binding, you'll have to
          * call a method w return type JoystickButton on the PaddedXbox object

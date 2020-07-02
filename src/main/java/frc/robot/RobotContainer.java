@@ -15,11 +15,12 @@ import frc.robot.subsystems.intake.*;
  */
 public class RobotContainer {
 
-  private VictorSPX intakeVictor = new VictorSPX(CanIds.intakeVictor.id);
 
-  // The robot's subsystems are defined here
+  private MotorControllerFactory factory;
+  
+  private VictorSPX intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
   private final IntakeSub intake = new IntakeSub(intakeVictor);
-
+  
   // The commands that run on those subsystems are defined here
   private final RunIntake runIntake = new RunIntake(intake, .5);
 
@@ -28,9 +29,8 @@ public class RobotContainer {
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer(PaddedXbox xbox) {
-    // Configure the button bindings
-    this.xbox = xbox;
+  public RobotContainer(MotorControllerFactory factory) {
+    this.factory = factory;
     configureButtonBindings();
   }
 
