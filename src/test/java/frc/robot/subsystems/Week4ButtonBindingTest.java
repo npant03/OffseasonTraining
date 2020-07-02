@@ -16,7 +16,7 @@ public class Week4ButtonBindingTest {
     public void runXbox(){
         System.out.println("test runnigns");
         
-        SimMotorControllerFactory factory = new SimMotorControllerFactory(false);
+        SimMotorControllerFactory factory = new SimMotorControllerFactory();
         RobotContainer robotContainer = new RobotContainer(factory); 
 
         // robotContainer.configureButtonBindings();
