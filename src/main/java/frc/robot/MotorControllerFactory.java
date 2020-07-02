@@ -1,7 +1,11 @@
 package frc.robot;
 
+// import static org.mockito.Mockito;
+
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
+import edu.wpi.first.wpilibj.Victor;
 
 public class MotorControllerFactory {
 
@@ -13,7 +17,8 @@ public class MotorControllerFactory {
     
     public VictorSPX getVictor(int id){
         if(isReal){return new VictorSPX(id);}
-        else{return null;}
+        // else{return mock(VictorSPX.class);}
+        else{return new VictorSPX(99);}
     }
 
     public TalonSRX getTalon(int id){

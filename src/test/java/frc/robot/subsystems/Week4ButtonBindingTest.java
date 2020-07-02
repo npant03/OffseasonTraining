@@ -6,16 +6,19 @@ import com.team7419.PaddedXbox;
 
 import org.junit.Test;
 
+import frc.robot.MotorControllerFactory;
 import frc.robot.RobotContainer;
 
 public class Week4ButtonBindingTest {
 
-    SimMotorControllerFactory factory = new SimMotorControllerFactory(false);
-
-    RobotContainer robotContainer = new RobotContainer(factory);
 
     @Test
     public void runXbox(){
+        System.out.println("test runnigns");
+        
+        SimMotorControllerFactory factory = new SimMotorControllerFactory(false);
+        RobotContainer robotContainer = new RobotContainer(factory); 
+
         // robotContainer.configureButtonBindings();
         /**
          * once we fix padded xbox, in order to make a button binding, you'll have to

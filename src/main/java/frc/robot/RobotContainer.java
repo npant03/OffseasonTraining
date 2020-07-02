@@ -18,11 +18,11 @@ public class RobotContainer {
 
   private MotorControllerFactory factory;
   
-  private VictorSPX intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
-  private final IntakeSub intake = new IntakeSub(intakeVictor);
+  private VictorSPX intakeVictor;
+  private final IntakeSub intake;
   
   // The commands that run on those subsystems are defined here
-  private final RunIntake runIntake = new RunIntake(intake, .5);
+  private final RunIntake runIntake;
 
   private PaddedXbox xbox;
 
@@ -31,6 +31,9 @@ public class RobotContainer {
    */
   public RobotContainer(MotorControllerFactory factory) {
     this.factory = factory;
+    intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
+    intake = new IntakeSub(intakeVictor);
+    runIntake = new RunIntake(intake, .5);
     configureButtonBindings();
   }
 
