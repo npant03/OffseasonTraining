@@ -6,7 +6,6 @@ import com.team7419.PaddedXbox;
 
 import org.junit.Test;
 
-import frc.robot.MotorControllerFactory;
 import frc.robot.RobotContainer;
 
 public class Week4ButtonBindingTest {
