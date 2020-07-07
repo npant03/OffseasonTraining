@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.team7419.PaddedXbox;
 
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -18,10 +19,17 @@ public class RealFactory implements Factory{
         return new TalonSRX(id);
     }
 
+    VictorSPX intakeVictor = this.getVictor(CanIds.intakeVictor.id);
+    IntakeSub intakeSub = new IntakeSub(intakeVictor);
     @Override
     public IntakeSub getIntakeSub(){
-        VictorSPX intakeVictor = this.getVictor(CanIds.intakeVictor.id);
-        return new IntakeSub(intakeVictor);
+        return intakeSub;
+    }
+
+    PaddedXbox paddedXbox = new PaddedXbox();
+    @Override
+    public PaddedXbox getPaddedXbox(){
+        return paddedXbox;
     }
 
 }

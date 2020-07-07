@@ -1,35 +1,31 @@
 package frc.robot.subsystems;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.team7419.PaddedXbox;
 
 import org.junit.Test;
 
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.intake.IntakeSub;
+import frc.robot.subsystems.intake.RunIntake;
 
 public class Week4ButtonBindingTest {
 
-
     @Test
     public void runXbox(){
-        System.out.println("test runnigns");
-        
-        SimFactory factory = new SimFactory();
-        RobotContainer robotContainer = new RobotContainer(factory); 
-
-        // robotContainer.configureButtonBindings();
-        /**
-         * 
-         * call a method w return type JoystickButton on the PaddedXbox object
-         * it'll probably look like 
-         * public JoystickButton getX(){
-         *      return new JoystickButton(this, PaddedXbox.F310Map.kGamepadButtonX.value)
-         * }
-         * so this test can just do this
-         * verify(xbox).getX().whenPressed(new RunIntake(intake, .5)) or whatever
-         */
-
+        System.out.println("test runs");
+        SimFactory simFactory = new SimFactory();
+        RobotContainer robotContainer = new RobotContainer(simFactory);
+        PaddedXbox xbox = simFactory.getPaddedXbox();
+        IntakeSub intake = simFactory.getIntakeSub();
+        robotContainer.configureButtonBindings();
+        verify(xbox, times(2)).getA().whenPressed(any()); //new RunIntake(intake, .5)
+        // verify(xbox, times(2)).getA();
     }
     
 }

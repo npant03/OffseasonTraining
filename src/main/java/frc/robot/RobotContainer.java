@@ -1,6 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.IMotorController;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.PaddedXbox;
 
@@ -18,8 +17,8 @@ public class RobotContainer {
 
   private Factory factory;
   private VictorSPX intakeVictor;
-  private final IntakeSub intake;
-  private final RunIntake runIntake;
+  private IntakeSub intake;
+  private RunIntake runIntake;
   private PaddedXbox xbox;
 
   /**
@@ -27,9 +26,9 @@ public class RobotContainer {
    */
   public RobotContainer(Factory factory) {
     this.factory = factory;
-    intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
-    intake = new IntakeSub(intakeVictor);
-    runIntake = new RunIntake(intake, .5);
+    // intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
+    intake = factory.getIntakeSub();
+    xbox = factory.getPaddedXbox();
     configureButtonBindings();
   }
 
@@ -38,7 +37,8 @@ public class RobotContainer {
    * We're going to teach you how to use this later.
    */
   public void configureButtonBindings() {
-    // new JoystickButton(xbox, PaddedXbox.F310Map.kGamepadButtonX.value)
-    // .whenPressed(new RunIntake(intake, .5));
+    // JoystickButton button = xbox.getA();
+    xbox.getA().whenPressed(new RunIntake(intake, .5));
   }
+  
 }
