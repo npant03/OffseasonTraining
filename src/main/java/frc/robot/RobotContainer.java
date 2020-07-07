@@ -16,21 +16,16 @@ import frc.robot.subsystems.intake.*;
  */
 public class RobotContainer {
 
-
-  private IMotorControllerFactory factory;
-  
+  private Factory factory;
   private VictorSPX intakeVictor;
   private final IntakeSub intake;
-  
-  // The commands that run on those subsystems are defined here
   private final RunIntake runIntake;
-
   private PaddedXbox xbox;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer(IMotorControllerFactory factory) {
+  public RobotContainer(Factory factory) {
     this.factory = factory;
     intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
     intake = new IntakeSub(intakeVictor);

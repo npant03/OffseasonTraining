@@ -15,12 +15,12 @@ public class Week4ButtonBindingTest {
     public void runXbox(){
         System.out.println("test runnigns");
         
-        SimMotorControllerFactory factory = new SimMotorControllerFactory();
+        SimFactory factory = new SimFactory();
         RobotContainer robotContainer = new RobotContainer(factory); 
 
         // robotContainer.configureButtonBindings();
         /**
-         * once we fix padded xbox, in order to make a button binding, you'll have to
+         * 
          * call a method w return type JoystickButton on the PaddedXbox object
          * it'll probably look like 
          * public JoystickButton getX(){
