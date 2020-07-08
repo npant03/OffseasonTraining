@@ -6,30 +6,38 @@ import com.team7419.PaddedXbox;
 
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
+import frc.robot.subsystems.intake.RunIntake;
 
 public class RealFactory implements Factory{
+    IntakeSub intakeSub;
+    PaddedXbox paddedXbox;
 
-	@Override
-	public VictorSPX getVictor(int id) {
+	private VictorSPX getVictor(int id) {
         return new VictorSPX(id);
     }
     
-    @Override
-    public TalonSRX getTalon(int id){
+    private TalonSRX getTalon(int id){
         return new TalonSRX(id);
     }
 
-    VictorSPX intakeVictor = this.getVictor(CanIds.intakeVictor.id);
-    IntakeSub intakeSub = new IntakeSub(intakeVictor);
     @Override
     public IntakeSub getIntakeSub(){
+        if (intakeSub == null){
+            intakeSub = new IntakeSub(this.getVictor(CanIds.intakeVictor.id));
+        }
         return intakeSub;
     }
 
-    PaddedXbox paddedXbox = new PaddedXbox();
     @Override
     public PaddedXbox getPaddedXbox(){
+        if (paddedXbox == null){
+            paddedXbox = new PaddedXbox();
+        }
         return paddedXbox;
     }
 
+    @Override
+    public RunIntake getRunIntake(double power){
+        return new RunIntake(this.getIntakeSub(), power);
+    }
 }

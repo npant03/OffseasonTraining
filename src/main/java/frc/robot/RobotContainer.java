@@ -38,7 +38,7 @@ public class RobotContainer {
    */
   public void configureButtonBindings() {
     // JoystickButton button = xbox.getA();
-    xbox.getA().whenPressed(new RunIntake(intake, .5));
+    xbox.getA().whenPressed(factory.getRunIntake(.5));  
   }
   
 }

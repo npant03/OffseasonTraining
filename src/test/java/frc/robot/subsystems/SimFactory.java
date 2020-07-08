@@ -10,30 +10,39 @@ import com.team7419.PaddedXbox;
 import frc.robot.Factory;
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
+import frc.robot.subsystems.intake.RunIntake;
 
 public class SimFactory implements Factory{
+    IntakeSub intakeSub;
+    PaddedXbox paddedXbox;
 
-    @Override
-    public VictorSPX getVictor(int id){
+    private VictorSPX getVictor(int id){
        return mock(VictorSPX.class);
     }
 
-    @Override
-    public TalonSRX getTalon(int id){
+    private TalonSRX getTalon(int id){
         return mock(TalonSRX.class);
     }
 
-    VictorSPX intakeVictor = this.getVictor(CanIds.intakeVictor.id);
-    IntakeSub intakeSub = new IntakeSub(intakeVictor);
     @Override
     public IntakeSub getIntakeSub(){
+        if (intakeSub == null){
+            intakeSub = new IntakeSub(this.getVictor(CanIds.intakeVictor.id));
+        }
         return intakeSub;
     }
 
-    PaddedXbox paddedXbox = spy(PaddedXbox.class);
     @Override
     public PaddedXbox getPaddedXbox(){
+        if(paddedXbox == null){
+            paddedXbox = mock(PaddedXbox.class);
+        }
         return paddedXbox;
+    }
+
+    @Override
+    public RunIntake getRunIntake(double power){
+        return new RunIntake(this.getIntakeSub(), power);
     }
     
 }

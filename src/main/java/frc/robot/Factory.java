@@ -5,11 +5,11 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.PaddedXbox;
 
 import frc.robot.subsystems.intake.IntakeSub;
+import frc.robot.subsystems.intake.RunIntake;
 
 public interface Factory {
     
-    public VictorSPX getVictor(int id);
-    public TalonSRX getTalon(int id);
     public IntakeSub getIntakeSub();
     public PaddedXbox getPaddedXbox();
+    public RunIntake getRunIntake(double power);
 }
