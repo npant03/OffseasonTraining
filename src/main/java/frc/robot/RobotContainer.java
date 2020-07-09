@@ -1,11 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
-import frc.robot.Constants.CanIds;
-import frc.robot.subsystems.intake.*;
-//revive skeleton branch
-
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -14,13 +8,6 @@ import frc.robot.subsystems.intake.*;
  */
 public class RobotContainer {
 
-  private VictorSPX intakeVictor = new VictorSPX(CanIds.intakeVictor.id);
-
-  // The robot's subsystems are defined here
-  private final IntakeSub intake = new IntakeSub(intakeVictor);
-
-  // The commands that run on those subsystems are defined here
-  private final RunIntake runIntake = new RunIntake();
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
