@@ -1,7 +1,6 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.*;
 
