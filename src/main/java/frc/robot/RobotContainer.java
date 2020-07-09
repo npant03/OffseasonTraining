@@ -16,19 +16,16 @@ import frc.robot.subsystems.intake.*;
 public class RobotContainer {
 
   private Factory factory;
-  private VictorSPX intakeVictor;
   private IntakeSub intake;
-  private RunIntake runIntake;
-  private PaddedXbox xbox;
+  private PaddedXbox joystick;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer(Factory factory) {
     this.factory = factory;
-    // intakeVictor = factory.getVictor(CanIds.intakeVictor.id);
     intake = factory.getIntakeSub();
-    xbox = factory.getPaddedXbox();
+    joystick = factory.getPaddedXbox();
     configureButtonBindings();
   }
 
@@ -37,8 +34,7 @@ public class RobotContainer {
    * We're going to teach you how to use this later.
    */
   public void configureButtonBindings() {
-    // JoystickButton button = xbox.getA();
-    xbox.getA().whenPressed(factory.getRunIntake(.5));  
+    joystick.getA().whenPressed(factory.getRunIntake(.5));  
   }
   
 }
