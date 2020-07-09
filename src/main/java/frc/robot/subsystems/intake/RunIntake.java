@@ -12,6 +12,10 @@ public class RunIntake extends CommandBase{
     this.power = power;
   }
 
+  public double getPower() {
+    return this.power;
+  }
+
   @Override
   public void initialize() {
   }
