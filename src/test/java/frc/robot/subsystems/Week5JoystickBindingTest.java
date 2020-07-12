@@ -1,23 +1,23 @@
 package frc.robot.subsystems;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.team7419.PaddedXbox;
+
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.RunIntake;
 
-public class Week4ButtonBindingTest {
+public class Week5JoystickBindingTest {
 
     @Test
-    public void runXbox(){
-        System.out.println("test runs");
+    public void runIntakeWithJoystick(){
         SimFactory simFactory = new SimFactory();
         PaddedXbox joystick = simFactory.getPaddedXbox();
 
@@ -36,8 +36,7 @@ public class Week4ButtonBindingTest {
         verify(mockButton).whenPressed(argument.capture());
         // Check that RunIntake was created in whenPressed()
         assertEquals(RunIntake.class, argument.getValue().getClass());
-        // Check that power for RunIntake == .5
-        assertEquals(true, (argument.getValue()).getPower() == .5);  
+
     }
 
 }

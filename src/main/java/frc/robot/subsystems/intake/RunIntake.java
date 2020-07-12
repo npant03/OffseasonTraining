@@ -1,28 +1,32 @@
 package frc.robot.subsystems.intake;
 
+import com.team7419.PaddedXbox;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunIntake extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
-  private double power;
+  private PaddedXbox joystick;
   
-  public RunIntake(IntakeSub intake, double power) {
+  public RunIntake(IntakeSub intake, PaddedXbox joystick) {
     this.intake = intake;
-    this.power = power;
+    this.joystick = joystick;
   }
 
-  public double getPower() {
-    return this.power;
-  }
+  // public double getPower() {
+  //   return this.power;
+  // }
 
   @Override
   public void initialize() {
+    intake.coast(); //this isn't necessary but i want it.
   }
 
   @Override
   public void execute() {
-    intake.setPower(power);
+    // intake.setPower(power);
+    intake.setPower(joystick.getLeftY());
 }
 
   @Override
