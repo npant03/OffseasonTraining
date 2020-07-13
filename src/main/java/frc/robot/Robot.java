@@ -75,6 +75,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    robotContainer.setDefaultCommands();
   }
 
   /**

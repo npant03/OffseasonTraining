@@ -41,7 +41,11 @@ public class SimFactory implements Factory{
     }
 
     @Override
-    public RunIntake getRunIntake(PaddedXbox joystick){
+    public RunIntake getRunIntakeWithPower(double power){
+        return new RunIntake(this.getIntakeSub(), power);
+    }
+    @Override
+    public RunIntake getRunIntakeWithJoystick(PaddedXbox joystick){
         // return new RunIntake(this.getIntakeSub(), power);
         return new RunIntake(this.getIntakeSub(), joystick);
     }
