@@ -3,8 +3,10 @@ package frc.robot.subsystems;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -29,21 +31,19 @@ public class Week5JoystickBindingTest {
         PaddedXbox joystick = simFactory.getPaddedXbox();
         Robot robot = mock(Robot.class);
         
-        // Test setup 
-        JoystickButton mockButton = mock(JoystickButton.class);       
-        when(joystick.getA()).thenReturn(mockButton);
- 
-        // Create RobotContainer 
         // RobotContainer robotContainer = new RobotContainer(simFactory);
-        RobotContainer robotContainer = mock(RobotContainer.class);
+        // RobotContainer robotContainer = mock(RobotContainer.class, CALLS_REAL_METHODS);
+        RobotContainer robotContainer = new RobotContainer(realFactory);
+        // RobotContainer robotContainer = spy(RobotContainer.class);
         IntakeSub intake = realFactory.getIntakeSub();
         //basically setDefaultCommands from robotcontainer never gets called (bc this is a test)
         //but when you run it for real it will get called.
         //so we need to check that it is called (because if kids are stupid and mess w robot.java), and that it does is what we want.
         // when(robotContainer.setDefaultCommands()).thenCallRealMethod(); cant bc void method
         // doCallRealMethod().when(robotContainer).setDefaultCommands(); null pointer bc instance in rC
+        // doCallRealMethod().when(robotContainer).setDefaultCommands();
         robotContainer.setDefaultCommands();
-        intake.setDefaultCommand(realFactory.getRunIntakeWithJoystick(joystick));
+        // intake.setDefaultCommand(realFactory.getRunIntakeWithJoystick(joystick));
         // assertEquals(intake.getDefaultCommand(), realFactory.getRunIntakeWithJoystick(joystick));
         assertNotEquals(null, intake.getDefaultCommand());
 
