@@ -7,8 +7,6 @@
 
 package frc.robot;
 
-import com.team7419.PaddedXbox;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 

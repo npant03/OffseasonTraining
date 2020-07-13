@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
