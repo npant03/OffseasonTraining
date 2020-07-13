@@ -74,7 +74,7 @@ public class Week5JoystickBindingTest {
         // verify(intakeSpy).setDefaultCommand(arguments.capture());
         // assertEquals(RunIntake.class, arguments.getValue().getClass());
 
-        assertEquals(simFactory.getRunIntakeWithJoystick(joystick), intake.getDefaultCommand());
+        assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
     }
 
 }
