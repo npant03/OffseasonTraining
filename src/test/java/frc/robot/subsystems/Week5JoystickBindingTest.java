@@ -38,7 +38,6 @@ public class Week5JoystickBindingTest {
 
     @Test
     public void intakeIsControlledWithJoystick(){
-        RealFactory realFactory = new RealFactory();
         SimFactory simFactory = new SimFactory();
         IntakeSub intake = simFactory.getIntakeSub();
         PaddedXbox joystick = simFactory.getPaddedXbox();
