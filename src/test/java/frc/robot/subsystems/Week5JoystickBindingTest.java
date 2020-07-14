@@ -30,6 +30,9 @@ public class Week5JoystickBindingTest {
         assertNotEquals(null, intake.getDefaultCommand());
     }
 
+    /**
+     * Checks that intake's default command is RunIntake (and takes a param joystick)
+     */
     @Test
     public void runIntakeWithJoystick(){
         SimFactory simFactory = new SimFactory();
@@ -40,6 +43,9 @@ public class Week5JoystickBindingTest {
         assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
     }
 
+    /**
+     * checks that moving the joystick up (or down) will correlate to speed
+     */
     @Test
     public void intakeIsControlledWithJoystick(){
         SimFactory simFactory = new SimFactory();
