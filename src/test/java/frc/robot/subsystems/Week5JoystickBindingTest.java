@@ -2,11 +2,15 @@ package frc.robot.subsystems;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.team7419.PaddedXbox;
 
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
+
 import frc.robot.RealFactory;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -39,11 +43,13 @@ public class Week5JoystickBindingTest {
     @Test
     public void intakeIsControlledWithJoystick(){
         SimFactory simFactory = new SimFactory();
-        IntakeSub intake = simFactory.getIntakeSub();
+        IntakeSub intake = mock(IntakeSub.class);
         PaddedXbox joystick = simFactory.getPaddedXbox();
         RunIntake runIntake = new RunIntake(intake, joystick);
         when(joystick.getLeftY()).thenReturn(0.75);
         runIntake.execute();
-        assertEquals(0.75, joystick.getLeftY(), 0);
+        ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
+        verify(intake).setPower(arguments.capture());
+        assertEquals(0.75, arguments.getValue(), 0);
     }
 }
