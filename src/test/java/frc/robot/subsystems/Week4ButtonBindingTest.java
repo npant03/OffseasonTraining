@@ -13,17 +13,19 @@ import frc.robot.subsystems.intake.RunIntake;
 public class Week4ButtonBindingTest {
 
     SimFactory simFactory = new SimFactory();
-    RobotContainer robotContainer = new RobotContainer(simFactory);
     PaddedXbox joystick = simFactory.getPaddedXbox();
     
     @Test
     public void runXbox(){
         System.out.println("test runs");
-
+        
         // Test setup 
         JoystickButton mockButton = mock(JoystickButton.class);       
         when(joystick.getA()).thenReturn(mockButton);
-        
+
+        // instantiating el robotoContainero
+        RobotContainer robotContainer = new RobotContainer(simFactory);
+
         // Check that xbox.getA() is called exactly once in RobotContainer constructor
         verify(joystick).getA(); 
         // Capture params for RunIntake instance

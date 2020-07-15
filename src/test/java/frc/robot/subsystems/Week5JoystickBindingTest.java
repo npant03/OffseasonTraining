@@ -11,19 +11,19 @@ import com.team7419.PaddedXbox;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
-import frc.robot.RealFactory;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
 
 public class Week5JoystickBindingTest {
 
+    SimFactory simFactory = new SimFactory();
+
     /**
      * Checks if RobotContainer's setDefaultCommands method sets a default command to IntakeSub
      */
     @Test
     public void defaultCommandTest() {
-        SimFactory simFactory = new SimFactory();
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
         robotContainer.setDefaultCommands();
@@ -35,7 +35,6 @@ public class Week5JoystickBindingTest {
      */
     @Test
     public void runIntakeWithJoystick(){
-        SimFactory simFactory = new SimFactory();
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
         PaddedXbox joystick = simFactory.getPaddedXbox();
@@ -47,8 +46,7 @@ public class Week5JoystickBindingTest {
      * checks that moving the joystick up (or down) will correlate to speed
      */
     @Test
-    public void intakeIsControlledWithJoystick(){
-        SimFactory simFactory = new SimFactory();
+    public void intakeIsControlledWithJoystick(){   
         IntakeSub intake = mock(IntakeSub.class);
         PaddedXbox joystick = simFactory.getPaddedXbox();
         RunIntake runIntake = new RunIntake(intake, joystick);
