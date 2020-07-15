@@ -12,12 +12,14 @@ import frc.robot.subsystems.intake.RunIntake;
 
 public class Week4ButtonBindingTest {
 
+    SimFactory simFactory = new SimFactory();
+    RobotContainer robotContainer = new RobotContainer(simFactory);
+    PaddedXbox joystick = simFactory.getPaddedXbox();
+    
     @Test
     public void runXbox(){
         System.out.println("test runs");
-        SimFactory simFactory = new SimFactory();
-        PaddedXbox joystick = simFactory.getPaddedXbox();
-        
+
         // Test setup 
         JoystickButton mockButton = mock(JoystickButton.class);       
         when(joystick.getA()).thenReturn(mockButton);
