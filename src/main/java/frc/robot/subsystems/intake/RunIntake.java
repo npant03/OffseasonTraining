@@ -9,15 +9,18 @@ public class RunIntake extends CommandBase{
   private IntakeSub intake;
   private double power;
   private PaddedXbox joystick;
+  private Boolean powerIfTrue;
 
   public RunIntake(IntakeSub intake, double power){
     this.intake = intake;
     this.power = power;
+    this.powerIfTrue = true;
   }
   
   public RunIntake(IntakeSub intake, PaddedXbox joystick) {
     this.intake = intake;
     this.joystick = joystick;
+    this.powerIfTrue = false;
     addRequirements(intake);
   }
 
@@ -33,8 +36,8 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void execute() {
-    // intake.setPower(power);
-    intake.setPower(joystick.getLeftY());
+    if(powerIfTrue){intake.setPower(power);}
+    else{intake.setPower(joystick.getLeftY());}
 }
 
   @Override

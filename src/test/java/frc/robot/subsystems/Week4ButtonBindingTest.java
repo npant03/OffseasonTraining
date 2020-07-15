@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.RunIntake;
 
 public class Week4ButtonBindingTest {
@@ -16,11 +17,11 @@ public class Week4ButtonBindingTest {
         System.out.println("test runs");
         SimFactory simFactory = new SimFactory();
         PaddedXbox joystick = simFactory.getPaddedXbox();
-
+        
         // Test setup 
         JoystickButton mockButton = mock(JoystickButton.class);       
         when(joystick.getA()).thenReturn(mockButton);
- 
+        
         // Check that xbox.getA() is called exactly once in RobotContainer constructor
         verify(joystick).getA(); 
         // Capture params for RunIntake instance
