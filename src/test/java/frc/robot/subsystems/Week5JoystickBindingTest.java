@@ -23,9 +23,9 @@ public class Week5JoystickBindingTest {
      */
     @Test
     public void defaultCommandTest() {
-        RealFactory realFactory = new RealFactory();
-        RobotContainer robotContainer = new RobotContainer(realFactory);
-        IntakeSub intake = realFactory.getIntakeSub();
+        SimFactory simFactory = new SimFactory();
+        RobotContainer robotContainer = new RobotContainer(simFactory);
+        IntakeSub intake = simFactory.getIntakeSub();
         robotContainer.setDefaultCommands();
         assertNotEquals(null, intake.getDefaultCommand());
     }
