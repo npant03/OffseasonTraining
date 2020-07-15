@@ -25,7 +25,7 @@ public class RunIntake extends CommandBase{
   }
 
   public double getPower() {
-    if(this.power == 0){return this.joystick.getLeftY();}
+    if(this.power == 0.0){return this.joystick.getLeftY();}
     else{return this.power;}
   }
 

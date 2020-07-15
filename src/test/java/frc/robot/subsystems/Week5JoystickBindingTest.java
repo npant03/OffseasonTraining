@@ -60,4 +60,5 @@ public class Week5JoystickBindingTest {
         verify(intake).setPower(arguments.capture());
         assertEquals(0.75, arguments.getValue(), 0);
     }
+    
 }
