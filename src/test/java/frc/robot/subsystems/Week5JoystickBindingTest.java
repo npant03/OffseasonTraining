@@ -11,6 +11,7 @@ import com.team7419.PaddedXbox;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
@@ -18,12 +19,15 @@ import frc.robot.subsystems.intake.RunIntake;
 public class Week5JoystickBindingTest {
 
     SimFactory simFactory = new SimFactory();
+    PaddedXbox joystick = simFactory.getPaddedXbox();
 
     /**
      * Checks if RobotContainer's setDefaultCommands method sets a default command to IntakeSub
      */
     @Test
     public void defaultCommandTest() {
+        JoystickButton mockButton = mock(JoystickButton.class);       
+        when(joystick.getA()).thenReturn(mockButton);
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
         robotContainer.setDefaultCommands();
@@ -35,9 +39,10 @@ public class Week5JoystickBindingTest {
      */
     @Test
     public void runIntakeWithJoystick(){
+        JoystickButton mockButton = mock(JoystickButton.class);       
+        when(joystick.getA()).thenReturn(mockButton);
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
-        PaddedXbox joystick = simFactory.getPaddedXbox();
         robotContainer.setDefaultCommands();
         assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
     }
@@ -48,7 +53,6 @@ public class Week5JoystickBindingTest {
     @Test
     public void intakeIsControlledWithJoystick(){   
         IntakeSub intake = mock(IntakeSub.class);
-        PaddedXbox joystick = simFactory.getPaddedXbox();
         RunIntake runIntake = new RunIntake(intake, joystick);
         when(joystick.getLeftY()).thenReturn(0.75);
         runIntake.execute();
