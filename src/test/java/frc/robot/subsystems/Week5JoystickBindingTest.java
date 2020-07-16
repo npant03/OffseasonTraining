@@ -15,7 +15,6 @@ import org.mockito.ArgumentCaptor;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
-import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 
