@@ -38,7 +38,7 @@ public class RealFactory implements Factory{
     }
 
     @Override
-    public RunIntake getRunIntake(double power){
+    public RunIntake getRunIntakeWithPower(double power){
         return new RunIntake(this.getIntakeSub(), power);
     }
 
