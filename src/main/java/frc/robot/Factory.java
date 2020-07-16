@@ -10,7 +10,7 @@ public interface Factory {
     
     public IntakeSub getIntakeSub();
     public PaddedXbox getPaddedXbox();
-    public RunIntake getRunIntake(double power);
+    public RunIntake getRunIntakeWithPower(double power);
     public RunIntakeWithJoystick getRunIntakeWithJoystick(PaddedXbox joystick);
 
 }
