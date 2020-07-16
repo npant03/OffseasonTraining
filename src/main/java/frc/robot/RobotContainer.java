@@ -30,7 +30,7 @@ public class RobotContainer {
    * Use this method to define your button->command mappings. 
    * We're going to teach you how to use this later.
    */
-  public void configureButtonBindings() {
+  private void configureButtonBindings() {
     joystick.getA().whenPressed(factory.getRunIntakeWithPower(.5));
   }
 
