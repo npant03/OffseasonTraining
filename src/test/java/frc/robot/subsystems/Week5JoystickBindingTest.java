@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 
 public class Week5JoystickBindingTest {
 
@@ -44,7 +45,7 @@ public class Week5JoystickBindingTest {
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
         robotContainer.setDefaultCommands();
-        assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
+        assertEquals(simFactory.getRunIntakeWithJoystick(simFactory).getClass(), intake.getDefaultCommand().getClass());
     }
 
     /**
@@ -53,12 +54,12 @@ public class Week5JoystickBindingTest {
     @Test
     public void intakeIsControlledWithJoystick(){   
         IntakeSub intake = mock(IntakeSub.class);
-        RunIntake runIntake = new RunIntake(intake, joystick);
+        RunIntakeWithJoystick runIntake = new RunIntakeWithJoystick(intake, simFactory);
         when(joystick.getLeftY()).thenReturn(0.75);
         runIntake.execute();
         ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
         verify(intake).setPower(arguments.capture());
         assertEquals(0.75, arguments.getValue(), 0);
     }
-    
+
 }

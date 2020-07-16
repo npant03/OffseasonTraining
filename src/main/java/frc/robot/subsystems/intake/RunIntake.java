@@ -8,25 +8,17 @@ public class RunIntake extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
   private double power;
-  private PaddedXbox joystick;
-  private Boolean powerIfTrue;
 
+  /**
+   * Creates a RunIntake which takes an intake (IntakeSub) and a power (double).
+   */
   public RunIntake(IntakeSub intake, double power){
     this.intake = intake;
     this.power = power;
-    this.powerIfTrue = true;
-  }
-  
-  public RunIntake(IntakeSub intake, PaddedXbox joystick) {
-    this.intake = intake;
-    this.joystick = joystick;
-    this.powerIfTrue = false;
-    addRequirements(intake);
   }
 
   public double getPower() {
-    if(this.power == 0.0){return this.joystick.getLeftY();}
-    else{return this.power;}
+    return this.power;
   }
 
   @Override
@@ -36,8 +28,7 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void execute() {
-    if(powerIfTrue){intake.setPower(power);}
-    else{intake.setPower(joystick.getLeftY());}
+    intake.setPower(power);
 }
 
   @Override
@@ -49,4 +40,5 @@ public class RunIntake extends CommandBase{
   public boolean isFinished() {
     return false;
   }
+
 }
