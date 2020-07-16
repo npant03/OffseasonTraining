@@ -46,8 +46,8 @@ public class RealFactory implements Factory{
      * Always pass SimFactory through this method. If you want it to be real, use the other method.
      */
     @Override
-    public RunIntakeWithJoystick getRunIntakeWithJoystick(Factory factory){
-        return new RunIntakeWithJoystick(this.getIntakeSub(), factory);
+    public RunIntakeWithJoystick getRunIntakeWithJoystick(PaddedXbox joystick){
+        return new RunIntakeWithJoystick(this.getIntakeSub(), joystick);
     }
     
 }

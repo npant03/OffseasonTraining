@@ -44,7 +44,7 @@ public class Week5JoystickBindingTest {
         RobotContainer robotContainer = new RobotContainer(simFactory);
         IntakeSub intake = simFactory.getIntakeSub();
         robotContainer.setDefaultCommands();
-        assertEquals(simFactory.getRunIntakeWithJoystick(simFactory).getClass(), intake.getDefaultCommand().getClass());
+        assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
     }
 
     /**
@@ -53,7 +53,7 @@ public class Week5JoystickBindingTest {
     @Test
     public void intakeIsControlledWithJoystick(){   
         IntakeSub intake = mock(IntakeSub.class);
-        RunIntakeWithJoystick runIntake = new RunIntakeWithJoystick(intake, simFactory);
+        RunIntakeWithJoystick runIntake = new RunIntakeWithJoystick(intake, joystick);
         when(joystick.getLeftY()).thenReturn(0.75);
         runIntake.execute();
         ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
