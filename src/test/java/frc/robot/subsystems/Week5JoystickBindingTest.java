@@ -6,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.PaddedXbox;
 
 import org.junit.Test;
@@ -13,6 +15,7 @@ import org.mockito.ArgumentCaptor;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
+import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 
@@ -59,6 +62,15 @@ public class Week5JoystickBindingTest {
         ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
         verify(intake).setPower(arguments.capture());
         assertEquals(0.75, arguments.getValue(), 0);
+    }
+
+    @Test
+    public void turnsOffWhenCommandEnds(){
+        IntakeSub intake = simFactory.getIntakeSub();
+        VictorSPX victor = intake.getVictor();
+        RunIntakeWithJoystick runIntake = new RunIntakeWithJoystick(intake, joystick);
+        runIntake.end(false);
+        verify(victor).set(ControlMode.PercentOutput, 0);
     }
 
 }

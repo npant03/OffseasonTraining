@@ -31,7 +31,7 @@ public class SimFactory implements Factory{
         }
         return intakeSub;
     }
-
+    
     @Override
     public PaddedXbox getPaddedXbox(){
         if(paddedXbox == null){
