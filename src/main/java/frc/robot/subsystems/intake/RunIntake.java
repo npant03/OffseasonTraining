@@ -6,8 +6,11 @@ public class RunIntake extends CommandBase{
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private IntakeSub intake;
   private double power;
-  
-  public RunIntake(IntakeSub intake, double power) {
+
+  /**
+   * Creates a RunIntake which takes an intake (IntakeSub) and a power (double).
+   */
+  public RunIntake(IntakeSub intake, double power){
     this.intake = intake;
     this.power = power;
   }
@@ -18,6 +21,7 @@ public class RunIntake extends CommandBase{
 
   @Override
   public void initialize() {
+    intake.coast(); //this isn't necessary but i want it.
   }
 
   @Override
@@ -34,4 +38,5 @@ public class RunIntake extends CommandBase{
   public boolean isFinished() {
     return false;
   }
+
 }

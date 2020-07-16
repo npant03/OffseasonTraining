@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -11,6 +10,7 @@ import frc.robot.Factory;
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 
 public class SimFactory implements Factory{
     IntakeSub intakeSub;
@@ -31,7 +31,7 @@ public class SimFactory implements Factory{
         }
         return intakeSub;
     }
-
+    
     @Override
     public PaddedXbox getPaddedXbox(){
         if(paddedXbox == null){
@@ -41,8 +41,16 @@ public class SimFactory implements Factory{
     }
 
     @Override
-    public RunIntake getRunIntake(double power){
+    public RunIntake getRunIntakeWithPower(double power){
         return new RunIntake(this.getIntakeSub(), power);
+    }
+
+    /**
+     * Always pass SimFactory through this method. If you want it to be real, use the other method.
+     */
+    @Override
+    public RunIntakeWithJoystick getRunIntakeWithJoystick(PaddedXbox joystick){
+        return new RunIntakeWithJoystick(this.getIntakeSub(), joystick);
     }
     
 }

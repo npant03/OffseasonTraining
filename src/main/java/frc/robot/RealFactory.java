@@ -7,6 +7,7 @@ import com.team7419.PaddedXbox;
 import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
+import frc.robot.subsystems.intake.RunIntakeWithJoystick;
 
 public class RealFactory implements Factory{
     IntakeSub intakeSub;
@@ -37,7 +38,16 @@ public class RealFactory implements Factory{
     }
 
     @Override
-    public RunIntake getRunIntake(double power){
+    public RunIntake getRunIntakeWithPower(double power){
         return new RunIntake(this.getIntakeSub(), power);
     }
+
+    /**
+     * Always pass SimFactory through this method. If you want it to be real, use the other method.
+     */
+    @Override
+    public RunIntakeWithJoystick getRunIntakeWithJoystick(PaddedXbox joystick){
+        return new RunIntakeWithJoystick(this.getIntakeSub(), joystick);
+    }
+    
 }

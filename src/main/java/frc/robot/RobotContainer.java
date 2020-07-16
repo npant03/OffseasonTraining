@@ -1,10 +1,7 @@
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.PaddedXbox;
 
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.CanIds;
 import frc.robot.subsystems.intake.*;
 
 /**
@@ -34,7 +31,11 @@ public class RobotContainer {
    * We're going to teach you how to use this later.
    */
   public void configureButtonBindings() {
-    joystick.getA().whenPressed(factory.getRunIntake(.5));  
+    joystick.getA().whenPressed(factory.getRunIntakeWithPower(.5));
+  }
+
+  public void setDefaultCommands(){
+    intake.setDefaultCommand(factory.getRunIntakeWithJoystick(joystick));
   }
   
 }

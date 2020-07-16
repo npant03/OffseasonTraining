@@ -27,6 +27,7 @@ public class Week3IntakeCommandTest{
         assertEquals(false, intakeMock.getInverted());
     }
 
+    @Test
     public void turnsOffWhenCommandEnds(){
         runIntake.end(false);
         verify(victor).set(ControlMode.PercentOutput, 0);
