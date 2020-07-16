@@ -1,7 +1,5 @@
 package frc.robot.subsystems.intake;
 
-import com.team7419.PaddedXbox;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class RunIntake extends CommandBase{
