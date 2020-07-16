@@ -40,13 +40,4 @@ public class Week4ButtonBindingTest {
         assertEquals(true, (argument.getValue()).getPower() == .5);  
     }
 
-    @Test
-    public void traceExample(){
-        // when(joystick.getA()).thenAnswer(new Answer(){
-        //     public JoystickButton answer(InvocationOnMock invocation) throws Throwable {
-        //         System.out.println("when pressed");
-        //         return (JoystickButton) mockButton;       
-        //     }
-        // });
-    }
 }
