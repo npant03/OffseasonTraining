@@ -1,7 +1,5 @@
 package frc.robot.subsystems.intake;
 
-import javax.swing.text.ViewFactory;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.Initers;
@@ -12,11 +10,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
  * the intake on our 2020 robot. There's a tutorial on Notion that's going to
  * step you through
  */
-
- //comment 
- 
 public class IntakeSub extends SubsystemBase {
-  // Aarav Sharma's Comment
+
   /**
    * Creates a new IntakeSub.
    */

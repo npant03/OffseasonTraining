@@ -19,7 +19,13 @@ public final class Constants {
 
     public static enum CanIds{
         
-        intakeVictor(11);
+        intakeVictor(11),
+        leftBack(4),
+        leftFront(5),
+        rightBack(3),
+        rightFront(2),
+
+        ;
 
         public final int id;
         CanIds(int id){this.id = id;}
