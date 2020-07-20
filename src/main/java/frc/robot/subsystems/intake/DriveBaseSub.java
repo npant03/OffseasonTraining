@@ -22,11 +22,6 @@ public class DriveBaseSub extends SubsystemBase {
     this.rightBack = rightBack;
     this.rightFront = rightFront;
 
-    rightBack.setSensorPhase(false);
-    rightBack.setInverted(true);
-    rightFront.setSensorPhase(false);
-    rightFront.setInverted(true);
-
     rightBack.follow(rightFront);
     leftBack.follow(leftFront);
   }
