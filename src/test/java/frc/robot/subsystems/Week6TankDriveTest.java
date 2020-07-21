@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -60,7 +61,7 @@ public class Week6TankDriveTest {
         tankDrive.execute();
         ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
         verify(driveBaseSub).setLeftPower(arguments.capture());
-        assertEquals(0.75, arguments.getValue(), 0);
+        assertNotEquals(0, arguments.getValue());
     }
 
     /**
@@ -68,13 +69,14 @@ public class Week6TankDriveTest {
      */
     @Test
     public void driveBaseRightIsControlledWithRightJoystickTest(){   
-        DriveBaseSub driveBaseSub = mock(DriveBaseSub.class);
+        DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
+        TalonFX rightBack = driveBaseSub.getRightFollow();
         when(joystick.getRightY()).thenReturn(0.75);
         tankDrive.execute();
         ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
-        verify(driveBaseSub).setRightPower(arguments.capture());
-        assertEquals(0.75, arguments.getValue(), 0);
+        verify(rightBack).set(ControlMode.PercentOutput, any());
+        // assertNotEquals(0, arguments.getValue());
     }
 
     /**
