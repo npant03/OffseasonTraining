@@ -1,5 +1,6 @@
 package frc.robot.subsystems.intake;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -25,6 +26,8 @@ public class TankDrive extends CommandBase {
 
   @Override
   public void execute() {
+    // driveBaseSub.getLeftMast().set(ControlMode.PercentOutput, joystick.getLeftY());
+    // driveBaseSub.getRightMast().set(ControlMode.PercentOutput, joystick.getRightY());
     driveBaseSub.setLeftPower(joystick.getLeftY());
     driveBaseSub.setRightPower(joystick.getRightY());
   }
