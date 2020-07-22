@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.PaddedXbox;
 
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
@@ -55,13 +53,14 @@ public class Week6TankDriveTest {
      */
     @Test
     public void driveBaseLeftIsControlledWithLeftJoystickTest(){   
-        DriveBaseSub driveBaseSub = mock(DriveBaseSub.class);
+        DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
-        when(joystick.getLeftY()).thenReturn(0.75);
+        TalonFX leftFront = driveBaseSub.getLeftMast();
+        TalonFX leftBack = driveBaseSub.getLeftFollow();
+        when(joystick.getLeftY()).thenReturn(.75);
         tankDrive.execute();
-        ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
-        verify(driveBaseSub).setLeftPower(arguments.capture());
-        assertNotEquals(0, arguments.getValue());
+        verify(leftFront).set(ControlMode.PercentOutput, .75);
+        verify(leftBack).set(ControlMode.PercentOutput, .75);
     }
 
     /**
@@ -71,16 +70,16 @@ public class Week6TankDriveTest {
     public void driveBaseRightIsControlledWithRightJoystickTest(){   
         DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
+        TalonFX rightFront = driveBaseSub.getRightMast();
         TalonFX rightBack = driveBaseSub.getRightFollow();
-        when(joystick.getRightY()).thenReturn(0.75);
+        when(joystick.getRightY()).thenReturn(.75);
         tankDrive.execute();
-        ArgumentCaptor<Double> arguments = ArgumentCaptor.forClass(Double.class);
-        verify(rightBack).set(ControlMode.PercentOutput, any());
-        // assertNotEquals(0, arguments.getValue());
+        verify(rightFront).set(ControlMode.PercentOutput, .75);
+        verify(rightBack).set(ControlMode.PercentOutput, .75);
     }
 
     /**
-     * Checks that when the command *ENDS* hint hint, the motors stop.
+     * Checks that when the command *ENDS* hint hint, all 4 drive motors stop.
      */
     @Test
     public void turnsOffWhenCommandEndsTest(){
@@ -96,6 +95,5 @@ public class Week6TankDriveTest {
         verify(leftBack).set(ControlMode.PercentOutput, 0);
         verify(rightBack).set(ControlMode.PercentOutput, 0);
     }
-
 
 }
