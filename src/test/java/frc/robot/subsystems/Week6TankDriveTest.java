@@ -109,14 +109,10 @@ public class Week6TankDriveTest {
         DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         TalonFX leftFront = driveBaseSub.getLeftMast();
         TalonFX rightFront = driveBaseSub.getRightMast();
-        TalonFX leftBack = driveBaseSub.getLeftFollow();
-        TalonFX rightBack = driveBaseSub.getRightFollow();
         TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
         tankDrive.end(false);
         verify(leftFront).set(ControlMode.PercentOutput, 0);
         verify(rightFront).set(ControlMode.PercentOutput, 0);
-        verify(leftBack).set(ControlMode.PercentOutput, 0);
-        verify(rightBack).set(ControlMode.PercentOutput, 0);
     }
 
 }
