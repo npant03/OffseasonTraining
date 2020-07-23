@@ -8,11 +8,11 @@ import com.team7419.PaddedXbox;
 
 import frc.robot.Factory;
 import frc.robot.Constants.CanIds;
-import frc.robot.subsystems.intake.DriveBaseSub;
+import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
 import frc.robot.subsystems.intake.RunIntakeWithJoystick;
-import frc.robot.subsystems.intake.TankDrive;
+import frc.robot.subsystems.drivebase.TankDrive;
 
 public class SimFactory implements Factory{
     IntakeSub intakeSub;

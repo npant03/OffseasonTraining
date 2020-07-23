@@ -15,8 +15,8 @@ import org.junit.Test;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.intake.DriveBaseSub;
-import frc.robot.subsystems.intake.TankDrive;
+import frc.robot.subsystems.drivebase.DriveBaseSub;
+import frc.robot.subsystems.drivebase.TankDrive;
 
 public class Week6TankDriveTest {
 
