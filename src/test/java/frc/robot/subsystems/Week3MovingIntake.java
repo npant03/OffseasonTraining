@@ -38,4 +38,5 @@ public class Week3MovingIntake{
         runIntake.execute();
         verify(victor).set(ControlMode.PercentOutput, .5);
     }
+    
 }
