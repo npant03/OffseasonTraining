@@ -32,6 +32,9 @@ public class Week6And7DriveTrainTest {
     TalonFX leftBack = driveBaseSub.getLeftFollow();
     TalonFX rightFront = driveBaseSub.getRightMast();
     TalonFX rightBack = driveBaseSub.getRightFollow();
+    JoystickButton mockButton = mock(JoystickButton.class);
+    TankDrive tankDrive = simFactory.getTankDrive(joystick);
+    ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
 
     /**
      * Checks if RobotContainer's setDefaultCommands method sets a default command
@@ -52,18 +55,14 @@ public class Week6And7DriveTrainTest {
     @Test
     public void aDefaultCommandTest() {
         try{
-        JoystickButton mockButton = mock(JoystickButton.class);
         when(joystick.getA()).thenReturn(mockButton);
         RobotContainer robotContainer = new RobotContainer(simFactory);
-        DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         robotContainer.setDefaultCommands();
         assertEquals(simFactory.getTankDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
         System.out.println("DriveBaseSub's default command is TankDrive!");
     } catch(AssertionError e){
-        JoystickButton mockButton = mock(JoystickButton.class);
         when(joystick.getA()).thenReturn(mockButton);
         RobotContainer robotContainer = new RobotContainer(simFactory);
-        DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
         robotContainer.setDefaultCommands();
         assertEquals(simFactory.getArcadeDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
         System.out.println("DriveBaseSub's default command is ArcadeDrive!");
@@ -76,13 +75,10 @@ public class Week6And7DriveTrainTest {
     @Test
     public void driveBaseLeftIsControlledWithLeftJoystickTest() {
         try{
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getTankDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
-        TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
         when(joystick.getLeftY()).thenReturn(.75);
         tankDrive.execute();
         verify(leftFront).set(ControlMode.PercentOutput, .75);
@@ -95,13 +91,10 @@ public class Week6And7DriveTrainTest {
             verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, 0);
             }
         } catch(AssertionError e){
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getArcadeDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
-        ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
         when(joystick.getLeftY()).thenReturn(.75);
         when(joystick.getRightX()).thenReturn(0.0);
         arcadeDrive.execute();
@@ -123,13 +116,10 @@ public class Week6And7DriveTrainTest {
     @Test
     public void driveBaseRightIsControlledWithRightJoystickTest(){   
         try {
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getTankDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
-        TankDrive tankDrive = new TankDrive(driveBaseSub, joystick);
         when(joystick.getRightY()).thenReturn(.75);
         tankDrive.execute();
         verify(rightFront).set(ControlMode.PercentOutput, .75);
@@ -139,13 +129,10 @@ public class Week6And7DriveTrainTest {
             verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, .75);;
             }
         } catch (AssertionError e){
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getArcadeDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
-        ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
         when(joystick.getLeftY()).thenReturn(0.0);
         when(joystick.getRightX()).thenReturn(.9);
         arcadeDrive.execute();
@@ -160,19 +147,57 @@ public class Week6And7DriveTrainTest {
             }
         }
     }
+    
+    /**
+     * Checks that moving the left joystick's Y and the right joystick's X will move the drivetrain correctly.
+     */
+    @Test
+    public void theDriveWorks(){  
+        try{
+            when(joystick.getA()).thenReturn(mockButton);
+            RobotContainer robotContainer = new RobotContainer(simFactory);
+            robotContainer.setDefaultCommands();
+            assertEquals(simFactory.getTankDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
+        when(joystick.getLeftY()).thenReturn(.633);
+        when(joystick.getRightY()).thenReturn(.112);
+        tankDrive.execute();
+        verify(leftFront).set(ControlMode.PercentOutput, .633);
+        verify(rightBack).set(ControlMode.PercentOutput, .112);
+        try {
+            verify(leftBack, atLeast(0)).follow(leftFront);
+            verify(rightBack, atLeast(0)).follow(rightFront);
+        } catch (AssertionError e) {
+            verify(leftBack, atLeast(0)).set(ControlMode.PercentOutput, .633);
+            verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, .112);;
+            }
+        } catch(AssertionError e){
+            when(joystick.getA()).thenReturn(mockButton);
+            RobotContainer robotContainer = new RobotContainer(simFactory);
+            robotContainer.setDefaultCommands();
+            assertEquals(simFactory.getArcadeDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
+        when(joystick.getLeftY()).thenReturn(.5);
+        when(joystick.getRightX()).thenReturn(.5);
+        arcadeDrive.execute();
+        verify(leftFront).set(ControlMode.PercentOutput, .4);
+        verify(rightFront).set(ControlMode.PercentOutput, .1);
+        try {
+            verify(leftBack, atLeast(0)).follow(leftFront);
+            verify(rightBack, atLeast(0)).follow(rightFront);
+        } catch (AssertionError f) {
+            verify(leftBack, atLeast(0)).set(ControlMode.PercentOutput, .4);
+            verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, .1);;
+            }
+        }
+    }
 
     /**
      * Checks that when the command *ENDS* hint hint, all 4 drive motors stop.
      */
     @Test
     public void turnsOffWhenCommandEndsTest(){
-        TankDrive tankDrive = simFactory.getTankDrive(joystick);
-        ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
         try {
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getTankDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
         tankDrive.end(false);
@@ -181,10 +206,8 @@ public class Week6And7DriveTrainTest {
         verify(leftBack).set(ControlMode.PercentOutput, 0);
         verify(rightBack).set(ControlMode.PercentOutput, 0);
         } catch(AssertionError e){
-            JoystickButton mockButton = mock(JoystickButton.class);
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
-            DriveBaseSub driveBaseSub = simFactory.getDriveBaseSub();
             robotContainer.setDefaultCommands();
             assertEquals(simFactory.getArcadeDrive(joystick).getClass(), driveBaseSub.getDefaultCommand().getClass());
         arcadeDrive.end(false);
