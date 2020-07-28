@@ -37,12 +37,10 @@ public class Week6And7DriveTrainTest {
     ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
 
     /**
-     * Checks if RobotContainer's setDefaultCommands method sets a default command
-     * to DriveBaseSub
+     * Checks if RobotContainer's setDefaultCommands method sets a default command to DriveBaseSub
      */
     @Test
-    public void driveBaseSubHasDefaultCommandTest() {   
-        JoystickButton mockButton = mock(JoystickButton.class);
+    public void driveBaseSubHasDefaultCommandTest() {
         when(joystick.getA()).thenReturn(mockButton);
         RobotContainer robotContainer = new RobotContainer(simFactory);
         robotContainer.setDefaultCommands();
@@ -70,10 +68,10 @@ public class Week6And7DriveTrainTest {
     }
 
     /**
-     * 
+     * Checks that the left joystick correlates to drivetrain speed
      */
     @Test
-    public void driveBaseLeftIsControlledWithLeftJoystickTest() {
+    public void driveBaseIsControlledWithLeftJoystickTest() {
         try{
             when(joystick.getA()).thenReturn(mockButton);
             RobotContainer robotContainer = new RobotContainer(simFactory);
@@ -111,7 +109,7 @@ public class Week6And7DriveTrainTest {
     }
 
     /**
-     * Checks that moving the right joystick up will correlate to the right side speed
+     * Checks that the right joystick correlates to drivetrain speed
      */
     @Test
     public void driveBaseRightIsControlledWithRightJoystickTest(){   
@@ -123,10 +121,13 @@ public class Week6And7DriveTrainTest {
         when(joystick.getRightY()).thenReturn(.75);
         tankDrive.execute();
         verify(rightFront).set(ControlMode.PercentOutput, .75);
+        verify(leftFront).set(ControlMode.PercentOutput, 0);
             try {
             verify(rightBack, atLeast(0)).follow(rightFront);
+            verify(leftBack, atLeast(0)).follow(leftFront);
             } catch (AssertionError e) {
-            verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, .75);;
+            verify(rightBack, atLeast(0)).set(ControlMode.PercentOutput, .75);
+            verify(leftBack, atLeast(0)).set(ControlMode.PercentOutput, 0);;
             }
         } catch (AssertionError e){
             when(joystick.getA()).thenReturn(mockButton);
@@ -149,7 +150,7 @@ public class Week6And7DriveTrainTest {
     }
     
     /**
-     * Checks that moving the left joystick's Y and the right joystick's X will move the drivetrain correctly.
+     * Checks that moving the left and right joystick will move the drivetrain correctly
      */
     @Test
     public void theDriveWorks(){  
