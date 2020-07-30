@@ -43,6 +43,6 @@ public class RobotContainer {
 
   public void setDefaultCommands() {
     intake.setDefaultCommand(factory.getRunIntakeWithJoystick(joystick));
-    driveBase.setDefaultCommand(factory.getTankDrive(joystick));
+    driveBase.setDefaultCommand(factory.getArcadeDrive(joystick));
   }
 }
