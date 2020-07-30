@@ -25,7 +25,7 @@ public final class Constants {
         rightBack(3),
         rightFront(2),
 
-        ;  //yes i am doing this again @neha.
+        ;
 
         public final int id;
         CanIds(int id){this.id = id;}

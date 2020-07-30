@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.team7419.PaddedXbox;
 
+import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.intake.IntakeSub;
 import frc.robot.subsystems.intake.RunIntake;
@@ -16,5 +17,6 @@ public interface Factory {
     public RunIntakeWithJoystick getRunIntakeWithJoystick(PaddedXbox joystick);
     public DriveBaseSub getDriveBaseSub();
     public TankDrive getTankDrive(PaddedXbox joystick);
+    public ArcadeDrive getArcadeDrive(PaddedXbox joystick);
 
 }
