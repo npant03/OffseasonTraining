@@ -57,7 +57,7 @@ public class DriveBaseCommandChecks {
             }
         }).when(rightFollow).follow(rightMast);
 
-        driveBase = new DriveBaseSub(leftFollow, leftMast, rightFollow, rightMast);
+        DriveBaseSub dummyDriveBase = new DriveBaseSub(leftFollow, leftMast, rightFollow, rightMast);
         if(leftFollowing & rightFollowing){following = true;}
     }
 
