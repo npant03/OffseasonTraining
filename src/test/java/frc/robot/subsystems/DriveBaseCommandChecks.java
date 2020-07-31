@@ -1,10 +1,7 @@
 package frc.robot.subsystems;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -15,10 +12,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.drivebase.ArcadeDrive;
-import frc.robot.subsystems.drivebase.DriveBaseSub;
-import frc.robot.subsystems.drivebase.TankDrive;
+import frc.robot.*;
+import frc.robot.subsystems.drivebase.*;
 
 public class DriveBaseCommandChecks {
 
@@ -46,7 +41,6 @@ public class DriveBaseCommandChecks {
         assertEquals(defaultClass == TankDrive.class | defaultClass == ArcadeDrive.class, true);
     }
 
-
     @Test
     public void checkIfFollowing(){
         doAnswer(new Answer<Void>() {
@@ -69,10 +63,7 @@ public class DriveBaseCommandChecks {
 
     @Test
     public void checkTankDriveControls(){
-        if(following){
-            rightFollow = rightMast;
-            leftFollow = leftMast;
-        }
+        configureFollowers();
 
         // check both sides are independent
         setJoystickValues(0, .75, 0, .5);
@@ -92,21 +83,43 @@ public class DriveBaseCommandChecks {
 
     @Test
     public void checkTankEndMethod(){
+        configureFollowers();
         tankDrive.end(true);
         verifyLeftRightSpeeds(0, 0);
     }
 
     @Test
     public void checkArcadeDriveControls(){
-        if(following){
-            rightFollow = rightMast;
-            leftFollow = leftMast;
-        }
-        when(joystick.getLeftY()).thenReturn(.75);
-        when(joystick.getRightY()).thenReturn(.5);
-        tankDrive.execute();
-        verifyLeftRightSpeeds(0.75, 0.5);
+        configureFollowers();
+        double kStraight = PowerConstants.DriveBaseStraight.val;
+        double kTurn = PowerConstants.DriveBaseTurn.val;
 
+        // check straight
+        setJoystickValues(0, .2, 0, 0);
+        arcadeDrive.execute();
+        verifyLeftRightSpeeds(kStraight * 0.2, kStraight * 0.2);
+
+        // check left turn
+        setJoystickValues(0, 0, -.5, 0);
+        arcadeDrive.execute();
+        verifyLeftRightSpeeds(-kTurn * 0.5, kTurn * 0.5);
+
+        // check right turn
+        setJoystickValues(0, 0, .9, 0);
+        arcadeDrive.execute();
+        verifyLeftRightSpeeds(kTurn * 0.9, -kTurn * 0.9);
+
+        // check straight and right together
+        setJoystickValues(0, 0.7, 0.4, 0);
+        arcadeDrive.execute();
+        verifyLeftRightSpeeds(kStraight * 0.7 + kTurn * .4, kStraight * 0.7 - kTurn * .4);
+    }
+
+    @Test
+    public void checkArcadeEndMethod(){
+        configureFollowers();
+        arcadeDrive.end(true);
+        verifyLeftRightSpeeds(0, 0);
     }
 
     private void verifyLeftRightSpeeds(double left, double right){
@@ -121,5 +134,12 @@ public class DriveBaseCommandChecks {
         when(joystick.getLeftY()).thenReturn(leftY);
         when(joystick.getRightX()).thenReturn(rightX);
         when(joystick.getRightY()).thenReturn(rightY);
+    }
+
+    private void configureFollowers(){
+        if(following){
+            rightFollow = rightMast;
+            leftFollow = leftMast;
+        }
     }
 }
