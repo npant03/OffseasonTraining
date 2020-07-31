@@ -68,33 +68,58 @@ public class DriveBaseCommandChecks {
     }
 
     @Test
-    public void checkTankDrive(){
+    public void checkTankDriveControls(){
         if(following){
             rightFollow = rightMast;
             leftFollow = leftMast;
         }
 
-        when(joystick.getLeftY()).thenReturn(.75);
-        when(joystick.getRightY()).thenReturn(.5);
+        // check both sides are independent
+        setJoystickValues(0, .75, 0, .5);
         tankDrive.execute();
-        checkLeftRightSpeeds(0.75, 0.5);
+        verifyLeftRightSpeeds(0.75, 0.5);
 
-        when(joystick.getLeftY()).thenReturn(-.75);
-        when(joystick.getRightY()).thenReturn(0.0);
+        // check setting negatives works
+        setJoystickValues(0, -.5, 0, -.3);
         tankDrive.execute();
-        checkLeftRightSpeeds(-0.75, 0.0);
+        verifyLeftRightSpeeds(-0.5, -.3);
+
+        // check setting random things doesnt move
+        setJoystickValues(1, 0, 1, 0);
+        tankDrive.execute();
+        verifyLeftRightSpeeds(0, 0);
     }
 
     @Test
-    public void checkEndMethod(){
+    public void checkTankEndMethod(){
         tankDrive.end(true);
-        checkLeftRightSpeeds(0, 0);
+        verifyLeftRightSpeeds(0, 0);
     }
 
-    private void checkLeftRightSpeeds(double left, double right){
+    @Test
+    public void checkArcadeDriveControls(){
+        if(following){
+            rightFollow = rightMast;
+            leftFollow = leftMast;
+        }
+        when(joystick.getLeftY()).thenReturn(.75);
+        when(joystick.getRightY()).thenReturn(.5);
+        tankDrive.execute();
+        verifyLeftRightSpeeds(0.75, 0.5);
+
+    }
+
+    private void verifyLeftRightSpeeds(double left, double right){
         verify(leftMast).set(ControlMode.PercentOutput, left);
         verify(leftFollow).set(ControlMode.PercentOutput, left);
         verify(rightMast).set(ControlMode.PercentOutput, right);
         verify(rightFollow).set(ControlMode.PercentOutput, right);
+    }
+
+    private void setJoystickValues(double leftX, double leftY, double rightX, double rightY){
+        when(joystick.getLeftX()).thenReturn(leftX);
+        when(joystick.getLeftY()).thenReturn(leftY);
+        when(joystick.getRightX()).thenReturn(rightX);
+        when(joystick.getRightY()).thenReturn(rightY);
     }
 }
