@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -14,6 +15,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.drivebase.TankDrive;
@@ -34,6 +36,16 @@ public class DriveBaseCommandChecks {
     JoystickButton mockButton = mock(JoystickButton.class);
     TankDrive tankDrive = simFactory.getTankDrive(joystick);
     ArcadeDrive arcadeDrive = simFactory.getArcadeDrive(joystick);
+
+    @Test
+    public void checkDefaultCommand(){
+        when(joystick.getA()).thenReturn(mockButton);
+        RobotContainer robotContainer = new RobotContainer(simFactory);
+        robotContainer.setDefaultCommands();
+        Class defaultClass = driveBase.getDefaultCommand().getClass();
+        assertEquals(defaultClass == TankDrive.class | defaultClass == ArcadeDrive.class, true);
+    }
+
 
     @Test
     public void checkIfFollowing(){
