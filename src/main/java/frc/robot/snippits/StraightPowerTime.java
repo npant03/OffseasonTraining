@@ -49,4 +49,5 @@ public class StraightPowerTime extends CommandBase {
   public boolean isFinished() {
     return done;
   }
+  
 }
