@@ -1,15 +1,5 @@
 package frc.robot;
 
-import frc.robot.Factory;
-import frc.robot.snippits.StraightPowerTime;
-
-import com.team7419.PaddedXbox;
-
-import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.drivebase.DriveBaseSub;
-import frc.robot.subsystems.intake.IntakeSub;
-
-
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -17,24 +7,11 @@ import frc.robot.subsystems.intake.IntakeSub;
  * (including subsystems, commands, and button mappings) should be declared here. 
  */
 public class RobotContainer {
-  private Factory factory;
-  private IntakeSub intake;
-  private PaddedXbox joystick;
-  private DriveBaseSub driveBaseSub;
-  private StraightPowerTime straightPowerTime;
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
-
-  public RobotContainer(Factory factory) {
-    this.factory = factory;
-    intake = factory.getIntakeSub();
-    joystick = factory.getPaddedXbox();
-    driveBaseSub = factory.getDriveBaseSub();
-    straightPowerTime = factory.getStraightPowerTime(PowerConstants.AutoStraightPower.val, 
-    PowerConstants.AutoStraightTime.val);
-    
+  public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -44,14 +21,5 @@ public class RobotContainer {
    * We're going to teach you how to use this later.
    */
   private void configureButtonBindings() {
-    joystick.getA().whenPressed(factory.getRunIntakeWithPower(0.5));
   }
-
-  public void setDefaultCommands(){
-    intake.setDefaultCommand(factory.getRunIntakeWithJoystick(joystick));
-    driveBaseSub.setDefaultCommand(factory.getArcadeDrive(joystick));
-  }
-  
-  public Command getAutoCommand(){return straightPowerTime;}
-
 }

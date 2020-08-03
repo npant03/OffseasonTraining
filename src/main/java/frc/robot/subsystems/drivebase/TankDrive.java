@@ -1,22 +1,14 @@
 package frc.robot.subsystems.drivebase;
 
-import com.team7419.PaddedXbox;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class TankDrive extends CommandBase {
   
-  private DriveBaseSub driveBaseSub;
-  private PaddedXbox joystick;
-
-
+  
   /**
    * Creates a new TankDrive.
    */
-  public TankDrive(DriveBaseSub driveBaseSub, PaddedXbox joystick) {
-    this.driveBaseSub = driveBaseSub;
-    this.joystick = joystick;
-    addRequirements(driveBaseSub);
+  public TankDrive() {
   }
 
   @Override
@@ -25,15 +17,10 @@ public class TankDrive extends CommandBase {
 
   @Override
   public void execute() {
-    // driveBaseSub.getLeftMast().set(ControlMode.PercentOutput, joystick.getLeftY());
-    // driveBaseSub.getRightMast().set(ControlMode.PercentOutput, joystick.getRightY());
-    driveBaseSub.setLeftPower(joystick.getLeftY());
-    driveBaseSub.setRightPower(joystick.getRightY());
   }
 
   @Override
   public void end(boolean interrupted) {
-    driveBaseSub.setAll(0);
   }
 
   @Override
