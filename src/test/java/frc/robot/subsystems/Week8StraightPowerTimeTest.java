@@ -12,6 +12,7 @@ import com.team7419.PaddedXbox;
 
 import org.junit.Test;
 
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.PowerConstants;
 import frc.robot.RobotContainer;
@@ -53,6 +54,35 @@ public class Week8StraightPowerTimeTest{
     }
 
     /**
+     * Tests if you dependency injected the right variables
+     */
+    @Test
+    public void dependencyInjectedCorrectlyTest(){
+        when(joystick.getA()).thenReturn(mockButton);
+        RobotContainer robotContainer = new RobotContainer(simFactory);
+        Command mockCommand = robotContainer.getAutoCommand(); // I know, it's not a mock. relax, I'm just bad at names
+        mockCommand.execute();        
+        double iTime = System.currentTimeMillis();
+        if(System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val){
+            verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+        } else if (System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val && System.currentTimeMillis() - iTime >
+        PowerConstants.AutoStraightTime.val - 0.01){
+            verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+            verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+        } else if (System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val){
+            verify(leftFront).set(ControlMode.PercentOutput, 0);
+            verify(leftBack).set(ControlMode.PercentOutput, 0);
+            verify(rightFront).set(ControlMode.PercentOutput, 0);
+            verify(rightBack).set(ControlMode.PercentOutput, 0);
+        }
+    }
+
+    /**
      * Makes sure your end method stops the motors **AND SETS TO BRAKE MODE**
      */
     @Test
@@ -69,6 +99,9 @@ public class Week8StraightPowerTimeTest{
         verify(rightBack).setNeutralMode(NeutralMode.Brake);
     }
 
+    /**
+     * Tests if you set your auto in robot container (with the right method name, getAutoCommand)
+     */
     @Test
     public void robotContainerSetsAutoTest(){
         when(joystick.getA()).thenReturn(mockButton);
@@ -76,6 +109,5 @@ public class Week8StraightPowerTimeTest{
         robotContainer.getAutoCommand();
         assertEquals(straightPowerTime.getClass(), robotContainer.getAutoCommand().getClass());
     }
-
 
 }

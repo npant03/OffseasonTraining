@@ -54,8 +54,8 @@ public enum PowerConstants{
     GyrokD(0.0001),
 
     // auto
-    AutoStraightPower(0.5),
-    AutoStraightTime(5),
+    AutoStraightPower(0.225),
+    AutoStraightTime(5.001),
 
     ;
 

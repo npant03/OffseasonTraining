@@ -1,6 +1,5 @@
 package frc.robot.subsystems.drivebase;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
