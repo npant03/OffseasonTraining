@@ -21,6 +21,7 @@ public class ArcadeDrive extends CommandBase {
 
   @Override
   public void initialize() {
+    driveBase.coast();
   }
 
   @Override

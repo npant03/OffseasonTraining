@@ -18,6 +18,7 @@ public class TankDrive extends CommandBase {
 
   @Override
   public void initialize() {
+    driveBase.coast();
   }
 
   @Override
