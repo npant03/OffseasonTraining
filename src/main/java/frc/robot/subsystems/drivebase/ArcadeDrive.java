@@ -26,7 +26,7 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void execute() {
     double leftPower = kStraight * joystick.getLeftY() + kTurn * joystick.getRightX();
-    double rightPower = kStraight * joystick.getRightY() + kTurn * -joystick.getRightX();
+    double rightPower = kStraight * joystick.getLeftY() + kTurn * -joystick.getRightX();
 
     driveBase.setLeftPower(leftPower);
     driveBase.setRightPower(rightPower);
