@@ -78,5 +78,5 @@ public class RealFactory implements Factory{
     public StraightPowerTime getStraightPowerTime(double power, double time){
         return new StraightPowerTime(this.getDriveBaseSub(), power, time);
     }
-    
+   
 }
