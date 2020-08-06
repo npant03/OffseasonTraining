@@ -53,6 +53,10 @@ public enum PowerConstants{
     GyrokI(0),
     GyrokD(0.0001),
 
+    // auto
+    AutoStraightPower(0.225),
+    AutoStraightTime(5.001),
+
     ;
 
     public final double val; 
