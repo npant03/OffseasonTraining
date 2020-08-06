@@ -69,13 +69,15 @@ public class Week8StraightPowerTimeTest{
             verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
-        } else if (System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val && System.currentTimeMillis() - iTime >
+        } 
+        if (System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val && System.currentTimeMillis() - iTime >
         PowerConstants.AutoStraightTime.val - 0.01){
             verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
-        } else if (System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val){
+        } 
+        if (System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val){
             verify(leftFront).set(ControlMode.PercentOutput, 0);
             verify(leftBack).set(ControlMode.PercentOutput, 0);
             verify(rightFront).set(ControlMode.PercentOutput, 0);
