@@ -64,20 +64,20 @@ public class Week8StraightPowerTimeTest{
         Command mockCommand = robotContainer.getAutoCommand(); // I know, it's not a mock. relax, I'm just bad at names
         mockCommand.execute();        
         double iTime = System.currentTimeMillis();
-        if(System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val){
+        if(System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val*1000){
             verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
         } 
-        if (System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val && System.currentTimeMillis() - iTime >
-        PowerConstants.AutoStraightTime.val - 0.01){
+        if (System.currentTimeMillis() - iTime < PowerConstants.AutoStraightTime.val*1000 && System.currentTimeMillis() - iTime >
+        PowerConstants.AutoStraightTime.val*1000 - 0.01){
             verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
             verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
         } 
-        if (System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val){
+        if (System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val*1000){
             verify(leftFront).set(ControlMode.PercentOutput, 0);
             verify(leftBack).set(ControlMode.PercentOutput, 0);
             verify(rightFront).set(ControlMode.PercentOutput, 0);
