@@ -38,14 +38,15 @@ public class Week8StraightPowerTimeTest{
      */
     @Test
     public void straightPowerTimeTest(){
+        StraightPowerTime straightPowerTime = simFactory.getStraightPowerTime(0.5, 5);
         straightPowerTime.execute();
-        verify(leftFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
-        verify(leftBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
-        verify(rightFront).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
-        verify(rightBack).set(ControlMode.PercentOutput, PowerConstants.AutoStraightPower.val);
+        verify(leftFront).set(ControlMode.PercentOutput, 0.5);
+        verify(leftBack).set(ControlMode.PercentOutput, 0.5);
+        verify(rightFront).set(ControlMode.PercentOutput, 0.5);
+        verify(rightBack).set(ControlMode.PercentOutput, 0.5);
         
         double iTime = System.currentTimeMillis();
-        if(System.currentTimeMillis() - iTime > PowerConstants.AutoStraightTime.val){
+        if(System.currentTimeMillis() - iTime > 5){
             verify(leftFront).set(ControlMode.PercentOutput, 0);
             verify(leftBack).set(ControlMode.PercentOutput, 0);
             verify(rightFront).set(ControlMode.PercentOutput, 0);
