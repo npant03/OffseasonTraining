@@ -34,6 +34,7 @@ public class Week4ButtonBindingTest {
         verify(mockButton).whenPressed(argument.capture());
         // Check that RunIntake was created in whenPressed()
         assertEquals(RunIntake.class, argument.getValue().getClass());
+        // System.out.println(argument.getValue().hashCode());
         // Check that power for RunIntake == .5
         assertEquals(true, (argument.getValue()).getPower() == .5);  
     }

@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.team7419.PaddedXbox;
 
 import frc.robot.Constants.CanIds;
+import frc.robot.GetPowerConstants;
 import frc.robot.snippits.StraightPowerTime;
 import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
@@ -17,6 +18,7 @@ public class RealFactory implements Factory{
     IntakeSub intakeSub;
     PaddedXbox paddedXbox;
     DriveBaseSub driveBaseSub;
+    GetPowerConstants getPowerConstants;
 
 	private VictorSPX getVictor(int id) {
         return new VictorSPX(id);
@@ -77,6 +79,13 @@ public class RealFactory implements Factory{
     @Override
     public StraightPowerTime getStraightPowerTime(double power, double time){
         return new StraightPowerTime(this.getDriveBaseSub(), power, time);
+    }
+
+    @Override
+    public GetPowerConstants getPowerConstants(){
+        GetPowerConstants output = this.getPowerConstants;
+        if(output == null){output = new GetPowerConstants();}
+        return output;
     }
     
 }

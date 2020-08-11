@@ -62,6 +62,6 @@ public enum PowerConstants{
     public final double val; 
     PowerConstants(double val){
         this.val = val;
-    }
     
+    }    
 }

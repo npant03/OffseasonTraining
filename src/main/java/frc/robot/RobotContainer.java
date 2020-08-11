@@ -20,6 +20,7 @@ public class RobotContainer {
   private PaddedXbox joystick;
   private TankDrive tankDrive;
   private DriveBaseSub driveBase;
+  private GetPowerConstants powerConstants;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -29,6 +30,7 @@ public class RobotContainer {
     intake = factory.getIntakeSub();
     joystick = factory.getPaddedXbox();
     driveBase = factory.getDriveBaseSub();
+    powerConstants = factory.getPowerConstants();
     
     // Configure the button bindings
     configureButtonBindings();
@@ -48,6 +50,6 @@ public class RobotContainer {
   }
 
   public Command getAutoCommand(){
-    return factory.getStraightPowerTime(PowerConstants.AutoStraightPower.val, PowerConstants.AutoStraightTime.val);
+    return factory.getStraightPowerTime(powerConstants.getAutoStraightPower(), powerConstants.getAutoStraightTime());
   }
 }
