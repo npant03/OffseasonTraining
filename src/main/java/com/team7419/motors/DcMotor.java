@@ -77,8 +77,7 @@ public class DcMotor{
         m_velocity = velocity;
     }
 
-    /**
-     * 
+    /** 
      * @param voltage voltage given to motor
      * @param load weight on mechanism
      * @param externalTorque i.e. gravity
