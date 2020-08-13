@@ -40,7 +40,7 @@ public class Week9TurnPowerTimeTest{
     @Test
     public void checkLeftPowers(){
         turnPowerTime.execute();
-        verifyLeftRightPowers(.2, -.2);
+        verifyLeftRightPowers(-.2, .2);
     }
 
     @Test
@@ -71,7 +71,7 @@ public class Week9TurnPowerTimeTest{
     public void rightChecks() throws InterruptedException {
         TurnPowerTime turnPowerTime = simFactory.getTurnPowerTime("RIGHT", .5, 700); 
         turnPowerTime.execute();
-        verifyLeftRightPowers(-.5, .5);
+        verifyLeftRightPowers(.5, -.5);
 
         turnPowerTime.initialize();
         Thread.sleep(705);
