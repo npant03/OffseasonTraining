@@ -28,8 +28,8 @@ public class TurnPowerTime extends CommandBase {
   @Override
   public void execute() {
     double negative;
-    if(direction == "LEFT"){negative = 1;}
-    else{negative = -1;}
+    if(direction == "LEFT"){negative = -1;}
+    else{negative = 1;}
     driveBase.setLeftPower(power * negative);
     driveBase.setRightPower(-power * negative);
   }
