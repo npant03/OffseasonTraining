@@ -10,6 +10,7 @@ import frc.robot.Factory;
 import frc.robot.PowerConstants;
 import frc.robot.Constants.CanIds;
 import frc.robot.snippits.StraightPowerTime;
+import frc.robot.snippits.TurnPowerTime;
 import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -83,4 +84,8 @@ public class SimFactory implements Factory{
         return new StraightPowerTime(this.getDriveBaseSub(), power, time);
     }
     
+    @Override
+    public TurnPowerTime getTurnPowerTime(String direction, double power, double time){
+        return new TurnPowerTime(this.getDriveBaseSub(), direction, power, time);
+    }
 }
