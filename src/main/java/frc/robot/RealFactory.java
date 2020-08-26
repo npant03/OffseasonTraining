@@ -6,6 +6,7 @@ import com.team7419.PaddedXbox;
 
 import frc.robot.Constants.CanIds;
 import frc.robot.snippits.StraightPowerTime;
+import frc.robot.snippits.StraightThenTurn;
 import frc.robot.snippits.TurnPowerTime;
 import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
@@ -85,6 +86,10 @@ public class RealFactory implements Factory{
         return new TurnPowerTime(this.getDriveBaseSub(), direction, power, time);
     }
 
+    @Override
+    public StraightThenTurn getStraightThenTurn(double power, double time, String direction){
+        return new StraightThenTurn(this.getDriveBaseSub(), power, time, direction);
+    }
 
     
 }

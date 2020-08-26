@@ -3,6 +3,7 @@ package frc.robot;
 import com.team7419.PaddedXbox;
 
 import frc.robot.snippits.StraightPowerTime;
+import frc.robot.snippits.StraightThenTurn;
 import frc.robot.snippits.TurnPowerTime;
 import frc.robot.subsystems.drivebase.ArcadeDrive;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
@@ -22,5 +23,6 @@ public interface Factory {
     public ArcadeDrive getArcadeDrive(PaddedXbox joystick);
     public StraightPowerTime getStraightPowerTime(double power, double time);
     public TurnPowerTime getTurnPowerTime(String direction, double power, double time);
+    public StraightThenTurn getStraightThenTurn(double power, double time, String direction);
 
 }
