@@ -3,6 +3,7 @@ package frc.robot;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.snippits.StraightPowerTime;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.drivebase.TankDrive;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -33,7 +34,7 @@ public class RobotContainer {
     powerConstants = factory.getPowerConstants();
     
     // Configure the button bindings
-    configureButtonBindings();
+    // configureButtonBindings();
   }
 
   /**
@@ -50,6 +51,9 @@ public class RobotContainer {
   }
 
   public Command getAutoCommand(){
+    StraightPowerTime straightPowerTime = new StraightPowerTime(driveBase, .5, .5);
     return factory.getStraightPowerTime(powerConstants.getAutoStraightPower(), powerConstants.getAutoStraightTime());
+    // return straightPowerTime;
   }
+  
 }

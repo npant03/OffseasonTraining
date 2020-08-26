@@ -1,6 +1,11 @@
 package frc.robot.subsystems;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -12,8 +17,13 @@ import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.team7419.PaddedXbox;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,6 +33,9 @@ import frc.robot.RobotContainer;
 import frc.robot.snippits.StraightPowerTime;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 
+
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(StraightPowerTime.class)
 public class Week8StraightPowerTimeTest{
 
     // DO NOT PUT ROBOTCONTAINER UP HERE.
@@ -36,7 +49,7 @@ public class Week8StraightPowerTimeTest{
     JoystickButton mockButton = mock(JoystickButton.class);
     StraightPowerTime straightPowerTime = simFactory.getStraightPowerTime(PowerConstants.AutoStraightPower.val, 
     PowerConstants.AutoStraightTime.val);
-    GetPowerConstants powerConstants;
+    GetPowerConstants getPowerConstants = simFactory.getPowerConstants();
 
 
     /**
@@ -116,33 +129,4 @@ public class Week8StraightPowerTimeTest{
         assertEquals(straightPowerTime.getClass(), robotContainer.getAutoCommand().getClass());
     }
 
-    @Test
-    public void hashingTest(){
-
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-            //   leftFollowing = true;
-              return null;
-            }
-        }).when(leftBack).follow(leftFront);
-
-        doAnswer(new Answer<Void>() {
-            public Void answer(InvocationOnMock invocation) {
-            //   rightFollowing = true;
-              return null;
-            }
-        }).when(rightBack).follow(rightFront);
-        powerConstants = simFactory.getPowerConstants();
-        when(powerConstants.getAutoStraightPower()).thenReturn(.82);
-        when(joystick.getA()).thenReturn(mockButton);
-        RobotContainer robotContainer = new RobotContainer(simFactory);
-        Command autoCommand = robotContainer.getAutoCommand();
-        System.out.println(autoCommand.getName());
-        autoCommand.execute();
-        verify(powerConstants).getAutoStraightPower();
-        // verify(leftFront).set(ControlMode.PercentOutput, .82);
-        // verify(leftBack).set(ControlMode.PercentOutput, .82);
-        // verify(rightFront).set(ControlMode.PercentOutput, .82);
-        // verify(rightBack).set(ControlMode.PercentOutput, .82);
-    }
 }
