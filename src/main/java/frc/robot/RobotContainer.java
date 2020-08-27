@@ -48,6 +48,8 @@ public class RobotContainer {
   }
 
   public Command getAutoCommand(){
+    // return factory.getStraightThenTurn(PowerConstants.AutoStraightPower.val, PowerConstants.AutoStraightTime.val,
+    //  "LEFT");
     return factory.getStraightPowerTime(PowerConstants.AutoStraightPower.val, PowerConstants.AutoStraightTime.val);
   }
 }
