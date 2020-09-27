@@ -66,10 +66,10 @@ public class Week10CommandGroupTest{
         scheduler.run();
         // CommandScheduler.getInstance().schedule(straightPowerTime);
         // scheduler.schedule(straightThenTurn);
-        for(int i = 0; i < 2; i++){
+        // for(int i = 0; i < 2; i++){
         // scheduler.run();
         // Thread.sleep(20);
-        }
+        // }
         Thread.sleep(6000);
         System.out.println(straightPowerTime.isScheduled());
         // verify(rightFront).set(ControlMode.PercentOutput, .2);
