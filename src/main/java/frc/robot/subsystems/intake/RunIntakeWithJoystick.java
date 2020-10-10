@@ -25,7 +25,7 @@ public class RunIntakeWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    intake.setPower(joystick.getLeftY());
+    intake.setPower(joystick.getLeftX());
   }
 
   @Override
