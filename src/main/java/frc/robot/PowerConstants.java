@@ -12,7 +12,7 @@ public enum PowerConstants{
     Shooter5419ShotsPower(.85),
 
     // // drive base
-    DriveBaseStraight(.5),
+    DriveBaseStraight(.3),
     DriveBaseTurn(.3),
     // DriveBaseLoadingStation(.2),
     DriveBaseMotionMagickP(.1),

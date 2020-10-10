@@ -20,6 +20,9 @@ public class DriveBaseSub extends SubsystemBase {
     this.leftFollow = leftFollow;
     this.rightFollow = rightFollow;
 
+    rightMast.setInverted(true);
+    rightFollow.setInverted(true);
+
     leftFollow.follow(leftMast);
     rightFollow.follow(rightMast);
   }

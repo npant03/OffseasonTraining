@@ -26,28 +26,28 @@ public class Week5JoystickBindingTest {
     /**
      * Checks if RobotContainer's setDefaultCommands method sets a default command to IntakeSub
      */
-    @Test
-    public void defaultCommandTest() {
-        JoystickButton mockButton = mock(JoystickButton.class);       
-        when(joystick.getA()).thenReturn(mockButton);
-        RobotContainer robotContainer = new RobotContainer(simFactory);
-        IntakeSub intake = simFactory.getIntakeSub();
-        robotContainer.setDefaultCommands();
-        assertNotEquals(null, intake.getDefaultCommand());
-    }
+    // @Test
+    // public void defaultCommandTest() {
+    //     JoystickButton mockButton = mock(JoystickButton.class);       
+    //     when(joystick.getA()).thenReturn(mockButton);
+    //     RobotContainer robotContainer = new RobotContainer(simFactory);
+    //     IntakeSub intake = simFactory.getIntakeSub();
+    //     robotContainer.setDefaultCommands();
+    //     assertNotEquals(null, intake.getDefaultCommand());
+    // }
 
     /**
      * Checks that intake's default command is RunIntake (and takes a param joystick)
      */
-    @Test
-    public void runIntakeWithJoystick(){
-        JoystickButton mockButton = mock(JoystickButton.class);       
-        when(joystick.getA()).thenReturn(mockButton);
-        RobotContainer robotContainer = new RobotContainer(simFactory);
-        IntakeSub intake = simFactory.getIntakeSub();
-        robotContainer.setDefaultCommands();
-        assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
-    }
+    // @Test
+    // public void runIntakeWithJoystick(){
+    //     JoystickButton mockButton = mock(JoystickButton.class);       
+    //     when(joystick.getA()).thenReturn(mockButton);
+    //     RobotContainer robotContainer = new RobotContainer(simFactory);
+    //     IntakeSub intake = simFactory.getIntakeSub();
+    //     robotContainer.setDefaultCommands();
+    //     assertEquals(simFactory.getRunIntakeWithJoystick(joystick).getClass(), intake.getDefaultCommand().getClass());
+    // }
 
     /**
      * checks that moving the joystick up (or down) will correlate to speed

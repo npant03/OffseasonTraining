@@ -59,8 +59,8 @@ public class RealFactory implements Factory{
     @Override
     public DriveBaseSub getDriveBaseSub(){
         if (driveBaseSub == null){
-            driveBaseSub = new DriveBaseSub(this.getTalonFX(CanIds.leftBack.id), this.getTalonFX(CanIds.leftFront.id), 
-            this.getTalonFX(CanIds.rightBack.id), this.getTalonFX(CanIds.rightFront.id));
+            driveBaseSub = new DriveBaseSub(this.getTalonFX(CanIds.leftFront.id), this.getTalonFX(CanIds.rightFront.id), 
+            this.getTalonFX(CanIds.leftBack.id), this.getTalonFX(CanIds.rightBack.id));
         }
             return driveBaseSub;
     }

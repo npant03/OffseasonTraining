@@ -3,6 +3,7 @@ package frc.robot;
 import com.team7419.PaddedXbox;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.snippits.StraightThenTurn;
 import frc.robot.subsystems.drivebase.DriveBaseSub;
 import frc.robot.subsystems.drivebase.TankDrive;
 import frc.robot.subsystems.intake.IntakeSub;
@@ -20,6 +21,7 @@ public class RobotContainer {
   private PaddedXbox joystick;
   private TankDrive tankDrive;
   private DriveBaseSub driveBase;
+  private StraightThenTurn straightThenTurn;
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -43,11 +45,11 @@ public class RobotContainer {
   }
 
   public void setDefaultCommands() {
-    intake.setDefaultCommand(factory.getRunIntakeWithJoystick(joystick));
+    // intake.setDefaultCommand(factory.getRunIntakeWithJoystick(joystick));
     driveBase.setDefaultCommand(factory.getArcadeDrive(joystick));
   }
 
   public Command getAutoCommand(){
-    return factory.getStraightPowerTime(PowerConstants.AutoStraightPower.val, PowerConstants.AutoStraightTime.val);
+    return new StraightThenTurn(factory);
   }
 }
